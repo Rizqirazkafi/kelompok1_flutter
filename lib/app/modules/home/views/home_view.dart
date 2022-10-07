@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kelompok1_flutter/app/data/models/surah.dart';
+import 'package:kelompok1_flutter/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -34,6 +35,9 @@ class HomeView extends GetView<HomeController> {
               itemBuilder: (context, index) {
                 Surah surah = snapshot.data![index];
                 return ListTile(
+                  onTap: () {
+                    Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
+                  },
                   leading: CircleAvatar(
                     child: Text("${surah.number}"),
                   ),
