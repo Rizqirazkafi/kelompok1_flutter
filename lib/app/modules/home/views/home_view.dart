@@ -13,25 +13,12 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future: controller.getAllSurah(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            }
-            return ListView.builder(
-              itemBuilder: (context, index) => ListTile(
-                leading: CircleAvatar(
-                  child: Text("${index + 1}"),
-                ),
-                title: Text("Surah Al - ..."),
-                subtitle: Text("7 Ayat | Makiyyah"),
-                trailing: Text("tulisan arab"),
-              ),
-            );
-          }),
+      body: Center(
+        child: Text(
+          'HomeView is working',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
     );
   }
 }
