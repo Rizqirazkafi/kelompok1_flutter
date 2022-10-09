@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../data/models/detail_surah.dart' as detail;
+import '../../../data/models/surah.dart';
 import '../controllers/detail_surah_controller.dart';
 
 class DetailSurahView extends GetView<DetailSurahController> {
-  const DetailSurahView({Key? key}) : super(key: key);
+  Surah surah = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('DetailSurahView'),
+        title: Text(
+            "${surah.name?.transliteration?.id?.toUpperCase() ?? 'Error..'}"),
         centerTitle: true,
       ),
       body: ListView(
@@ -69,6 +72,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     }
                     detail.Verse? ayat = snapshot.data?.verses?[index];
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Card(
                           child: Padding(
@@ -98,16 +102,26 @@ class DetailSurahView extends GetView<DetailSurahController> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 10),
                         Text(
                           "${ayat!.text?.arab}",
-                          textAlign: TextAlign.right,
-                          style: TextStyle(  
-                            fontSize: 25,
-                          ),
+                          textAlign: TextAlign.end,
+                          style: TextStyle(fontSize: 35),
                         ),
-                        SizedBox(
-                          height: 5,
+                        SizedBox(height: 20),
+                        Text(
+                          "${ayat.text?.transliteration?.en}",
+                          textAlign: TextAlign.end,
+                          style: TextStyle(
+                              fontSize: 15, fontStyle: FontStyle.italic),
                         ),
+                        SizedBox(height: 5),
+                        Text(
+                          "${ayat.translation?.id}",
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        SizedBox(height: 5),
                       ],
                     );
                   },
@@ -115,6 +129,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
               );
             },
           ),
+        ],
       ),
     );
   }

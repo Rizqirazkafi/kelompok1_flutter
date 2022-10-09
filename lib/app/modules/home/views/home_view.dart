@@ -14,8 +14,14 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: const Text('Al - Quran'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () => Get.toNamed(Routes.SEARCH),
+            icon: Icon(Icons.search),
+          ),
+        ],
       ),
       body: FutureBuilder<List<Surah>>(
           future: controller.getAllSurah(),
