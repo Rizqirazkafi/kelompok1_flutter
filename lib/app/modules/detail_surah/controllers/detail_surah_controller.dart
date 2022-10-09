@@ -18,6 +18,4 @@ class DetailSurahController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
