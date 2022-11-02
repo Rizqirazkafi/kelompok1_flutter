@@ -19,31 +19,49 @@ class DetailSurahView extends GetView<DetailSurahController> {
       body: ListView(
         padding: EdgeInsets.all(20),
         children: [
-          Card(
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                children: [
-                  Text(
-                    "${surah.name?.transliteration?.id?.toUpperCase() ?? 'Error..'}",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
+          GestureDetector(
+            onTap: () => Get.defaultDialog(
+              titlePadding: EdgeInsets.all(10),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 30,
+              ),
+              title: "TAFSIR",
+              titleStyle: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+              content: Container(
+                  child: Text(
+                "${surah.tafsir?.id ?? "Tidak Ada Tafsir pada surah ini..."}",
+                textAlign: TextAlign.justify,
+              )),
+            ),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Text(
+                      "${surah.name?.transliteration?.id?.toUpperCase() ?? 'Error..'}",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "( ${surah.name?.translation?.id?.toUpperCase() ?? 'Error..'} )",
-                    style: TextStyle(
-                      fontSize: 20,
+                    Text(
+                      "( ${surah.name?.translation?.id?.toUpperCase() ?? 'Error..'} )",
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? 'Error...'} ",
-                    style: TextStyle(
-                      fontSize: 18,
+                    Text(
+                      "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? 'Error...'} ",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
