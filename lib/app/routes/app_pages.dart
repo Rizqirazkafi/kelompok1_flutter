@@ -4,8 +4,6 @@ import '../modules/detail_surah/bindings/detail_surah_binding.dart';
 import '../modules/detail_surah/views/detail_surah_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
-import '../modules/introduction/bindings/introduction_binding.dart';
-import '../modules/introduction/views/introduction_view.dart';
 
 part 'app_routes.dart';
 
@@ -21,6 +19,7 @@ class AppPages {
       page: () => const HomeView(),
       binding: HomeBinding(),
     ),
+<<<<<<< HEAD
     GetPage(
       name: _Paths.INTRODUCTION,
       page: () => const IntroductionView(),
@@ -31,5 +30,7 @@ class AppPages {
       page: () => const DetailSurahView(),
       binding: DetailSurahBinding(),
     ),
+=======
+>>>>>>> e863ad39ca0094fbddd2f66d0ebfe9e9f46efab8
   ];
 }

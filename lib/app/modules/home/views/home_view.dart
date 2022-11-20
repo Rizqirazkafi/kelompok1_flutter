@@ -17,6 +17,7 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
       ),
+<<<<<<< HEAD
       body: FutureBuilder<List<Surah>>(
           future: controller.getAllSurah(),
           builder: (context, snapshot) {
@@ -50,6 +51,14 @@ class HomeView extends GetView<HomeController> {
               },
             );
           }),
+=======
+      body: Center(
+        child: Text(
+          'HomeView is working',
+          style: TextStyle(fontSize: 20),
+        ),
+      ),
+>>>>>>> e863ad39ca0094fbddd2f66d0ebfe9e9f46efab8
     );
   }
 }
