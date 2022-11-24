@@ -33,6 +33,5 @@ void main() async {
   Map<String, dynamic> dataAnnas =
       (json.decode(resAnnas.body) as Map<String, dynamic>)["data"];
   // Data dari API(raw data) -> Model (Yang sudh disiapin)
-  DetailSurah annas = DetailSurah.fromJson(dataAnnas);
-  print(annas.verses![0].text!.arab);
+  Detailsurah annas = Detailsurah.fromJson(dataAnnas);
 }
