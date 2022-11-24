@@ -21,5 +21,6 @@ dev_dependencies:
 flutter: 
   assets: 
     - assets/lottie/
+    - assets/image/
   uses-material-design: true
 
