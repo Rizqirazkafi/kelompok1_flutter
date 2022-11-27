@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 const appPurple = Color(0xFF431AA1);
@@ -8,16 +10,35 @@ const appWhite = Color(0xFFFAF8FC);
 const appOrange = Color(0xFFE6704A);
 
 ThemeData themeLight = ThemeData(
-  primaryColor: appPurple,
-  scaffoldBackgroundColor: appWhite,
-  appBarTheme: AppBarTheme(
-    backgroundColor: appPurple,
-  ),
-);
+    brightness: Brightness.light,
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: appPurpleDark,
+    ),
+    primaryColor: appPurple,
+    scaffoldBackgroundColor: appWhite,
+    appBarTheme: AppBarTheme(
+      elevation: 0,
+      backgroundColor: appPurple,
+    ),
+    tabBarTheme: TabBarTheme(
+        indicator: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: appPurpleDark,
+            ),
+          ),
+        ),
+        labelColor: appPurpleDark,
+        unselectedLabelColor: Colors.grey));
 ThemeData themeDark = ThemeData(
+  brightness: Brightness.dark,
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: appWhite,
+  ),
   primaryColor: appPurpleLight2,
   scaffoldBackgroundColor: appPurpleDark,
   appBarTheme: AppBarTheme(
+    elevation: 4,
     backgroundColor: appPurpleDark,
   ),
   textTheme: TextTheme(
@@ -28,4 +49,14 @@ ThemeData themeDark = ThemeData(
       color: appWhite,
     ),
   ),
+  tabBarTheme: TabBarTheme(
+      indicator: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: appWhite,
+          ),
+        ),
+      ),
+      labelColor: appWhite,
+      unselectedLabelColor: Colors.grey),
 );

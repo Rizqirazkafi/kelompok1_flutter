@@ -8,30 +8,44 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:kelompok1_flutter/app/data/models/detail_surah.dart';
+import 'package:kelompok1_flutter/app/data/models/juz.dart';
 import 'package:kelompok1_flutter/app/data/models/surah.dart';
 
 void main() async {
-  Uri url = Uri.parse("https://api.quran.gading.dev/surah");
-  var res = await http.get(url);
+  List<Juz> allJuz = [];
+  for (int i = 1; i <= 30; i++) {
+    Uri url = Uri.parse("https://api.quran.gading.dev/juz/$i");
+    var res = await http.get(url);
 
-  List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
-  // 1-114 -> index ke 113 [An-Nas]
-  // print(data[113]["number"]);
-  // Data dari API(raw data) -> Model (Yang sudh disiapin)
-  Surah surahAnnas = Surah.fromJson(data[113]);
-  // print(surahAnnas.name);
-  // print("==========");
-  // print(surahAnnas.number);
-  // print("==========");
-  // print(surahAnnas.numberOfVerses);
-  // print("==========");
-  // print(surahAnnas.tafsir);
-  // print(surahAnnas.number);
-  Uri urlAnnas =
-      Uri.parse("https://api.quran.gading.dev/surah/${surahAnnas.number}");
-  var resAnnas = await http.get(urlAnnas);
-  Map<String, dynamic> dataAnnas =
-      (json.decode(resAnnas.body) as Map<String, dynamic>)["data"];
-  // Data dari API(raw data) -> Model (Yang sudh disiapin)
-  Detailsurah annas = Detailsurah.fromJson(dataAnnas);
+    Map<String, dynamic> data =
+        (json.decode(res.body) as Map<String, dynamic>)["data"];
+    Juz juz = Juz.fromJson(data);
+    allJuz.add(juz);
+  }
+  // return allJuz;
+  // Uri url = Uri.parse("https://api.quran.gading.dev/surah");
+  // var res = await http.get(url);
+
+  // List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
+  // // 1-114 -> index ke 113 [An-Nas]
+  // // print(data[113]["number"]);
+  // // Data dari API(raw data) -> Model (Yang sudh disiapin)
+  // Surah surahAnnas = Surah.fromJson(data[113]);
+  // // print(surahAnnas.name);
+  // // print("==========");
+  // // print(surahAnnas.number);
+  // // print("==========");
+  // // print(surahAnnas.numberOfVerses);
+  // // print("==========");
+  // // print(surahAnnas.tafsir);
+  // // print(surahAnnas.number);
+  // Uri urlAnnas =
+  //     Uri.parse("https://api.quran.gading.dev/surah/${surahAnnas.number}");
+  // var resAnnas = await http.get(urlAnnas);
+  // Map<String, dynamic> dataAnnas =
+  //     (json.decode(resAnnas.body) as Map<String, dynamic>)["data"];
+  // // Data dari API(raw data) -> Model (Yang sudh disiapin)
+  // Detailsurah annas = Detailsurah.fromJson(dataAnnas);
+
+  // Surah surahAnnas = Surah.fromJson(data[113]);
 }
