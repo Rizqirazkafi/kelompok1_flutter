@@ -27,7 +27,7 @@ class HomeController extends GetxController {
   Future<List<Juz>> getAllJuz() async {
     List<Juz> allJuz = [];
     for (int i = 1; i <= 30; i++) {
-      Uri url = Uri.parse("https://api.quran.gading.dev/juz/$i");
+      Uri url = Uri.parse("https://api-quran-weld.vercel.app/juz/$i");
       var res = await http.get(url);
 
       Map<String, dynamic> data =

@@ -183,7 +183,10 @@ class HomeView extends GetView<HomeController> {
                               itemBuilder: (context, index) {
                                 juz.Juz detailJuz = snapshot.data![index];
                                 return ListTile(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Get.toNamed(Routes.DETAIL_JUZ,
+                                        arguments: detailJuz);
+                                  },
                                   leading: Container(
                                     height: 35,
                                     width: 35,
@@ -200,6 +203,8 @@ class HomeView extends GetView<HomeController> {
                                   title: Text("Juz ${index + 1}"),
                                   isThreeLine: true,
                                   subtitle: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                           "Dimulai dari ${detailJuz.juzStartInfo}"),

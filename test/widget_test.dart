@@ -11,17 +11,28 @@ import 'package:kelompok1_flutter/app/data/models/detail_surah.dart';
 import 'package:kelompok1_flutter/app/data/models/juz.dart';
 import 'package:kelompok1_flutter/app/data/models/surah.dart';
 
-void main() async {
+Future<List<Juz>> main() async {
   List<Juz> allJuz = [];
   for (int i = 1; i <= 30; i++) {
-    Uri url = Uri.parse("https://api.quran.gading.dev/juz/$i");
+    Uri url = Uri.parse("https://api-quran-weld.vercel.app/juz/$i");
     var res = await http.get(url);
 
     Map<String, dynamic> data =
         (json.decode(res.body) as Map<String, dynamic>)["data"];
     Juz juz = Juz.fromJson(data);
     allJuz.add(juz);
+    Map<String, dynamic> dataToModel = {
+      "juz": data["juz"],
+      //"juzStartSurahNumber": data["juzEndSurahNumber"],
+      "juzStartInfo": data["juzStartInfo"],
+      "juzEndInfo": data["juzEndInfo"],
+      "totalVerses": data["totalVerses"],
+    };
+    print(dataToModel);
   }
+
+  return allJuz;
+
   // return allJuz;
   // Uri url = Uri.parse("https://api.quran.gading.dev/surah");
   // var res = await http.get(url);
