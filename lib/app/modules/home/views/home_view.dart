@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:kelompok1_flutter/app/contents/color.dart';
-import 'package:kelompok1_flutter/app/data/models/juz.dart' as juz;
-import 'package:kelompok1_flutter/app/data/models/surah.dart';
+import 'package:kelompok1_flutter/app/data/models/detail_surah.dart' as detail;
+
 import 'package:kelompok1_flutter/app/routes/app_pages.dart';
 
+import '../../../data/models/surah.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -164,7 +165,7 @@ class HomeView extends GetView<HomeController> {
                               },
                             );
                           }),
-                      FutureBuilder<List<juz.Juz>>(
+                      FutureBuilder<List<Map<String, dynamic>>>(
                         future: controller.getAllJuz(),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
@@ -181,11 +182,12 @@ class HomeView extends GetView<HomeController> {
                           return ListView.builder(
                               itemCount: snapshot.data!.length,
                               itemBuilder: (context, index) {
-                                juz.Juz detailJuz = snapshot.data![index];
+                                Map<String, dynamic> dataMapPerJuz =
+                                    snapshot.data![index];
                                 return ListTile(
                                   onTap: () {
                                     Get.toNamed(Routes.DETAIL_JUZ,
-                                        arguments: detailJuz);
+                                        arguments: dataMapPerJuz);
                                   },
                                   leading: Container(
                                     height: 35,
@@ -206,9 +208,10 @@ class HomeView extends GetView<HomeController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                          "Dimulai dari ${detailJuz.juzStartInfo}"),
-                                      Text("Sampai ${detailJuz.juzEndInfo}")
+                                      //   Text(
+                                      //       "Dimulai dari ${dataMapPerJuz["juzStartInfo"]["surah"]} ayat ${(dataMapPerJuz["juzStartInfo"]["surah"] as detail.Verse).number?.inSurah}"),
+                                      //   Text(
+                                      //       "Sampai ${dataMapPerJuz["juzEndInfo"]["surah"]} ayat ${(dataMapPerJuz["juzEndInfo"]["surah"] as detail.Verse).number?.inSurah}"),
                                     ],
                                   ),
                                 );

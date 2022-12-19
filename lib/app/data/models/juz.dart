@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_collection_literals, unnecessary_new, duplicate_ignore, unnecessary_this
+
 class Juz {
   int? juz;
   String? juzStartInfo;
@@ -20,6 +22,7 @@ class Juz {
     if (json['verses'] != null) {
       verses = <Verses>[];
       json['verses'].forEach((v) {
+        // ignore: unnecessary_new
         verses!.add(new Verses.fromJson(v));
       });
     }

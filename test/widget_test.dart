@@ -11,52 +11,68 @@ import 'package:kelompok1_flutter/app/data/models/detail_surah.dart';
 import 'package:kelompok1_flutter/app/data/models/juz.dart';
 import 'package:kelompok1_flutter/app/data/models/surah.dart';
 
-Future<List<Juz>> main() async {
-  List<Juz> allJuz = [];
-  for (int i = 1; i <= 30; i++) {
-    Uri url = Uri.parse("https://api-quran-weld.vercel.app/juz/$i");
-    var res = await http.get(url);
+Future<List<Map<String, dynamic>>> main() async {
+  int juz = 1;
 
-    Map<String, dynamic> data =
-        (json.decode(res.body) as Map<String, dynamic>)["data"];
-    Juz juz = Juz.fromJson(data);
-    allJuz.add(juz);
-    Map<String, dynamic> dataToModel = {
-      "juz": data["juz"],
-      //"juzStartSurahNumber": data["juzEndSurahNumber"],
-      "juzStartInfo": data["juzStartInfo"],
-      "juzEndInfo": data["juzEndInfo"],
-      "totalVerses": data["totalVerses"],
-    };
-    print(dataToModel);
+  List<Map<String, dynamic>> penampungAyat = [];
+  List<Map<String, dynamic>> allJuz = [];
+
+  for (var i = 1; i <= 144; i++) {
+    var res =
+        await http.get(Uri.parse("https://api-quran-weld.vercel.app/juz/$i"));
+    Map<String, dynamic> rawData = json.decode(res.body)["data"];
+    Detailsurah data = Detailsurah.fromJson(rawData);
+
+    if (data.verses != null) {
+      data.verses!.forEach((ayat) {
+        if (ayat.meta?.juz == juz) {
+          penampungAyat.add({
+            "surah": data.name?.transliteration?.id ?? '',
+            "ayat": ayat,
+          });
+        } else {
+          print("============");
+          print("BERHASIL MEMASUKAN JUZ $juz");
+          print("START :");
+          print("Ayat: ${(penampungAyat[0]['ayat'] as Verse).number?.inSurah}");
+          print((penampungAyat[0]["ayat"] as Verse).text?.arab);
+          print("END :");
+          print(
+              "Ayat: ${(penampungAyat[penampungAyat.length - 1]['ayat'] as Verse).number?.inSurah}");
+          print((penampungAyat[penampungAyat.length - 1]["ayat"] as Verse)
+              .text
+              ?.arab);
+          allJuz.add({
+            "juz": juz,
+            "juzStartInfo": penampungAyat[0],
+            "juzEndInfo": penampungAyat[penampungAyat.length - 1],
+            "verses": penampungAyat,
+          });
+          juz++;
+          penampungAyat.clear();
+          penampungAyat.add({
+            "surah": data.name?.transliteration?.id ?? '',
+            "ayat": ayat,
+          });
+        }
+      });
+    }
   }
 
+  print("============");
+  print("BERHASIL MEMASUKAN JUZ $juz");
+  print("START :");
+  print("Ayat: ${(penampungAyat[0]['ayat'] as Verse).number?.inSurah}");
+  print((penampungAyat[0]["ayat"] as Verse).text?.arab);
+  print("END :");
+  print(
+      "Ayat: ${(penampungAyat[penampungAyat.length - 1]['ayat'] as Verse).number?.inSurah}");
+  print((penampungAyat[penampungAyat.length - 1]["ayat"] as Verse).text?.arab);
+  allJuz.add({
+    "juz": juz,
+    "juzStartInfo": penampungAyat[0],
+    "juzEndInfo": penampungAyat[penampungAyat.length - 1],
+    "verses": penampungAyat,
+  });
   return allJuz;
-
-  // return allJuz;
-  // Uri url = Uri.parse("https://api.quran.gading.dev/surah");
-  // var res = await http.get(url);
-
-  // List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
-  // // 1-114 -> index ke 113 [An-Nas]
-  // // print(data[113]["number"]);
-  // // Data dari API(raw data) -> Model (Yang sudh disiapin)
-  // Surah surahAnnas = Surah.fromJson(data[113]);
-  // // print(surahAnnas.name);
-  // // print("==========");
-  // // print(surahAnnas.number);
-  // // print("==========");
-  // // print(surahAnnas.numberOfVerses);
-  // // print("==========");
-  // // print(surahAnnas.tafsir);
-  // // print(surahAnnas.number);
-  // Uri urlAnnas =
-  //     Uri.parse("https://api.quran.gading.dev/surah/${surahAnnas.number}");
-  // var resAnnas = await http.get(urlAnnas);
-  // Map<String, dynamic> dataAnnas =
-  //     (json.decode(resAnnas.body) as Map<String, dynamic>)["data"];
-  // // Data dari API(raw data) -> Model (Yang sudh disiapin)
-  // Detailsurah annas = Detailsurah.fromJson(dataAnnas);
-
-  // Surah surahAnnas = Surah.fromJson(data[113]);
 }

@@ -58,22 +58,6 @@ class DetailSurahView extends GetView<DetailSurahController> {
                 ),
               ),
             ),
-            // onTap: () => Get.defaultDialog(
-            //   titlePadding: EdgeInsets.all(10),
-            //   contentPadding: EdgeInsets.symmetric(
-            //     vertical: 20,
-            //     horizontal: 30,
-            //   ),
-            //   title: "TAFSIR",
-            //   titleStyle: TextStyle(
-            //     fontWeight: FontWeight.bold,
-            //   ),
-            //   content: Container(
-            //       child: Text(
-            //   "${surah.tafsir?.id ?? "Tidak Ada Tafsir pada surah ini..."}",
-            //   textAlign: TextAlign.justify,
-            // )),
-            // ),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
